@@ -3,7 +3,7 @@
 Marketing website for PVTKRRX addon.
 
 ## Live URL
-**Production**: https://pvtkrrx-bofzqj7vn-choppedonions-projects-716010cf.vercel.app
+**Production**: https://pvtkrrx.vercel.app
 
 ## Local Development
 ```bash
