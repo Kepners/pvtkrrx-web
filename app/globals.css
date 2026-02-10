@@ -94,6 +94,159 @@ body::before {
   opacity: 0.3;
 }
 
+/* ===== DIGITAL CORRUPTION EFFECTS ===== */
+
+/* Aggressive RGB split on hover/focus */
+.chromatic-aberration {
+  position: relative;
+}
+
+.chromatic-aberration::before,
+.chromatic-aberration::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.chromatic-aberration::before {
+  color: #00FFFF;
+  transform: translateX(-3px);
+  mix-blend-mode: screen;
+}
+
+.chromatic-aberration::after {
+  color: #FF00FF;
+  transform: translateX(3px);
+  mix-blend-mode: screen;
+}
+
+.chromatic-aberration:hover::before,
+.chromatic-aberration:hover::after {
+  opacity: 0.7;
+}
+
+/* Pixelated/Datamosh effect */
+@keyframes pixelate-glitch {
+  0%, 100% {
+    filter: none;
+  }
+  25% {
+    filter: contrast(1.3) saturate(1.5);
+  }
+  50% {
+    filter: contrast(1.1) saturate(1.8) hue-rotate(5deg);
+  }
+  75% {
+    filter: contrast(1.4) saturate(1.3) hue-rotate(-5deg);
+  }
+}
+
+.pixel-glitch {
+  animation: pixelate-glitch 8s ease-in-out infinite;
+}
+
+/* Scan line overlay (MORE INTENSE) */
+.scan-lines-heavy {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-lines-heavy::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 255, 0.03) 0px,
+    rgba(0, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: scan-line-drift 8s linear infinite;
+}
+
+@keyframes scan-line-drift {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+/* Digital noise texture */
+@keyframes noise-anim {
+  0%, 100% {
+    background-position: 0 0;
+  }
+  10% {
+    background-position: -5% -10%;
+  }
+  20% {
+    background-position: -15% 5%;
+  }
+  30% {
+    background-position: 7% -25%;
+  }
+  40% {
+    background-position: 20% 25%;
+  }
+  50% {
+    background-position: -25% 10%;
+  }
+  60% {
+    background-position: 15% 5%;
+  }
+  70% {
+    background-position: 0 15%;
+  }
+  80% {
+    background-position: 25% 35%;
+  }
+  90% {
+    background-position: -10% 10%;
+  }
+}
+
+.digital-noise {
+  position: relative;
+}
+
+.digital-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  opacity: 0.15;
+  animation: noise-anim 0.5s steps(10) infinite;
+}
+
+/* Radial distortion background */
+.radial-distortion {
+  background:
+    radial-gradient(
+      ellipse 150% 100% at 50% 50%,
+      transparent 30%,
+      rgba(0, 255, 255, 0.03) 50%,
+      rgba(255, 0, 255, 0.03) 70%,
+      transparent 100%
+    );
+}
+
+/* ===== END DIGITAL CORRUPTION EFFECTS ===== */
+
 /* Chrome text effect */
 .chrome-text {
   font-family: var(--font-orbitron);

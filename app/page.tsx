@@ -40,7 +40,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-16 scan-lines-heavy digital-noise">
+        {/* Add radial distortion layer */}
+        <div className="absolute inset-0 radial-distortion" />
+
         {/* Animated mesh background - 3 layers */}
         <div className="absolute inset-0 mesh-bg-layer-1" />
         <div className="absolute inset-0 mesh-bg-layer-2" />
@@ -65,9 +68,11 @@ export default function Home() {
               className="space-y-8"
             >
               {/* Logo - BIG and BOLD */}
-              <GlitchText className="chrome-text-animated text-7xl sm:text-8xl lg:text-9xl leading-none">
-                PVTKRRX
-              </GlitchText>
+              <div className="chromatic-aberration" data-text="PVTKRRX">
+                <GlitchText className="chrome-text-animated text-7xl sm:text-8xl lg:text-9xl leading-none pixel-glitch">
+                  PVTKRRX
+                </GlitchText>
+              </div>
 
               {/* Tagline with stagger reveal */}
               <motion.div
@@ -228,165 +233,341 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-rajdhani font-bold text-center mb-20 text-white">
-            Everything You Need
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <FeatureCard icon="⚡" title="Instant Streaming" description="Already on your seedbox? Stream starts immediately. Not downloaded yet? We trigger the download and poll until ready." />
-            <FeatureCard icon="🏆" title="Private Tracker Quality" description="4K BluRay remuxes, Dolby Atmos, HDR10+. Your private tracker content, your Stremio library." />
-            <FeatureCard icon="🔒" title="Your Infrastructure" description="You provide your own seedbox. We just connect it to Stremio. Zero storage costs for us, full control for you." />
-            <FeatureCard icon="🎬" title="Sports, Movies, TV" description="4 catalogs: Sports (with genre filters), Movies, TV Shows, and your Library of completed downloads." />
-            <FeatureCard icon="📱" title="Works Everywhere" description="Stremio on desktop, mobile, TV, web. PVTKRRX works on all platforms with zero config changes." />
-            <FeatureCard icon="🚀" title="60-Second Setup" description="Enter your Jackett + qBittorrent credentials, test connection, install in Stremio. Done." />
+      <section className="relative py-24 overflow-hidden scan-lines-heavy">
+        {/* Background layers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-dark to-dark-secondary" />
+        <div className="absolute inset-0 mesh-bg-layer-2 opacity-30" />
+        <div className="absolute inset-0 digital-noise" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-rajdhani font-bold mb-4">
+              <span className="chrome-text-animated pixel-glitch">YOUR SEEDBOX</span>
+              <br />
+              <span className="text-neon-cyan">DIRECT TO STREMIO</span>
+            </h2>
+            <p className="text-gray text-lg max-w-2xl mx-auto">
+              No middleware. No transcoding. No bullshit. Just your qBittorrent + Jackett → Stremio.
+            </p>
+          </motion.div>
+
+          {/* Feature grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: '⚡',
+                title: 'Direct Playback',
+                desc: 'Stream files from your qBittorrent WebDAV. No proxy servers.',
+                delay: 0
+              },
+              {
+                icon: '🔒',
+                title: 'Private Trackers',
+                desc: 'Connect Jackett/Prowlarr indexers. Your credentials stay encrypted.',
+                delay: 0.1
+              },
+              {
+                icon: '🏃',
+                title: 'Sports Priority',
+                desc: 'First-class sports catalog. Live events, replays, highlights.',
+                delay: 0.2
+              },
+              {
+                icon: '💰',
+                title: '£1/month',
+                desc: 'Flat fee. No usage limits. No surprise charges.',
+                delay: 0.3
+              },
+              {
+                icon: '🌐',
+                title: 'Your Infrastructure',
+                desc: 'Works with ANY seedbox. Hetzner, Whatbox, your basement server.',
+                delay: 0.4
+              },
+              {
+                icon: '🔧',
+                title: 'Zero Config',
+                desc: 'Paste your URLs + credentials. Install addon. Done.',
+                delay: 0.5
+              },
+            ].map((feature, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: feature.delay }}
+                className="group relative"
+              >
+                {/* Glitch border */}
+                <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 via-transparent to-neon-magenta/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* Card */}
+                <div className="relative bg-dark-secondary/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 h-full transition-all duration-300 group-hover:border-neon-cyan/30 group-hover:transform group-hover:translateY(-2px) scan-lines-heavy">
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-rajdhani font-bold mb-2 text-white group-hover:text-neon-cyan transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray text-sm leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-4 bg-dark-secondary/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-rajdhani font-bold mb-6 text-white">Simple Pricing</h2>
-          <p className="text-xl text-gray mb-16">One plan. No hidden fees. Cancel anytime.</p>
+      <section className="relative py-24 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-dark" />
+        <div className="absolute inset-0 mesh-bg-layer-1 opacity-20" />
+        <div className="absolute inset-0 cyber-grid opacity-20" />
+        <div className="absolute inset-0 digital-noise" />
 
-          <div className="bg-dark-secondary rounded-3xl p-12 border border-neon-cyan/30 shadow-2xl shadow-neon-cyan/5 max-w-md mx-auto">
-            <div className="mb-8">
-              <p className="text-gray text-sm uppercase tracking-wide font-rajdhani font-semibold mb-3">Monthly</p>
-              <p className="text-7xl font-rajdhani font-bold text-neon-cyan mb-2">£1</p>
-              <p className="text-gray">per month</p>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl sm:text-5xl font-rajdhani font-bold mb-4 chrome-text-animated pixel-glitch">
+              PRICING
+            </h2>
+            <p className="text-gray">No tiers. No upsells. One price.</p>
+          </motion.div>
+
+          {/* Terminal-style pricing card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative group"
+          >
+            {/* Outer glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan to-neon-magenta rounded-2xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+
+            {/* Card */}
+            <div className="relative bg-dark-secondary/80 backdrop-blur-md border-2 border-neon-cyan/30 rounded-2xl p-8 scan-lines-heavy">
+              {/* Terminal header */}
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/10">
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <span className="ml-2 text-gray text-sm font-jetbrains">pricing.sh</span>
+              </div>
+
+              {/* Terminal content */}
+              <div className="font-jetbrains text-sm space-y-3">
+                <div className="flex items-start gap-2">
+                  <span className="text-neon-cyan">$</span>
+                  <span className="text-gray">cat pricing.txt</span>
+                </div>
+
+                <div className="pl-4 space-y-2">
+                  <div className="text-white">
+                    <span className="text-neon-magenta">PVTKRRX_SUBSCRIPTION</span>
+                    <span className="text-white">=</span>
+                    <span className="text-neon-cyan text-3xl font-bold">£1</span>
+                    <span className="text-gray">/month</span>
+                  </div>
+
+                  <div className="text-gray text-xs space-y-1">
+                    <div>→ Unlimited streams</div>
+                    <div>→ Unlimited catalogs</div>
+                    <div>→ All features included</div>
+                    <div>→ Sports priority catalog</div>
+                    <div>→ Cancel anytime (seriously)</div>
+                  </div>
+
+                  <div className="flex items-center gap-2 mt-6">
+                    <span className="text-neon-cyan">$</span>
+                    <span className="text-gray">stripe checkout --amount=100</span>
+                  </div>
+
+                  <div className="text-neon-magenta pl-4">
+                    ✓ Redirecting to payment...
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <Link
+                href="/signup"
+                className="mt-8 block w-full text-center px-8 py-4 bg-neon-cyan text-dark font-rajdhani font-bold text-lg rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-neon-cyan/50"
+              >
+                Start 7-Day Free Trial
+              </Link>
+
+              <p className="text-center text-gray text-xs mt-4">
+                No credit card required • Cancel anytime • Seriously just £1/month
+              </p>
             </div>
-            <ul className="text-left space-y-4 mb-10">
-              <PricingFeature text="Unlimited streams" />
-              <PricingFeature text="All 4 catalogs (Sports, Movies, TV, Library)" />
-              <PricingFeature text="Genre filtering for sports" />
-              <PricingFeature text="Instant playback from seedbox" />
-              <PricingFeature text="Comet download triggering" />
-              <PricingFeature text="Cancel anytime, no questions" />
-            </ul>
-            <Link href="/signup" className="block w-full px-8 py-4 bg-neon-cyan text-dark font-rajdhani font-bold text-lg rounded-xl
-                                           hover:bg-neon-cyan/90 transition shadow-lg shadow-neon-cyan/30">
-              Start 7-Day Free Trial
-            </Link>
-            <p className="mt-4 text-sm text-gray">No credit card required for trial</p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 px-4">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-5xl font-rajdhani font-bold text-center mb-16 text-white">FAQ</h2>
+      <section className="relative py-24 overflow-hidden scan-lines-heavy">
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-secondary to-dark" />
+        <div className="absolute inset-0 mesh-bg-layer-3 opacity-20" />
+        <div className="absolute inset-0 digital-noise" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl sm:text-5xl font-rajdhani font-bold chrome-text-animated pixel-glitch">
+              FAQ
+            </h2>
+          </motion.div>
+
           <div className="space-y-4">
-            <FAQItem question="Do I need my own seedbox?" answer="Yes. PVTKRRX is a bridge between your existing seedbox (with Jackett + qBittorrent) and Stremio. You provide the infrastructure, we provide the addon. This keeps our costs near zero and gives you full control." />
-            <FAQItem question="What if I don't have a seedbox yet?" answer="You'll need one to use PVTKRRX. We recommend Ultra.cc, Feral Hosting, or Whatbox. Most plans start around $5-10/month and include Jackett + qBittorrent pre-installed." />
-            <FAQItem question="How does the 7-day free trial work?" answer="Sign up, configure your seedbox, and use PVTKRRX completely free for 7 days. No credit card required. After 7 days, you'll be asked to subscribe at £1/month to continue." />
-            <FAQItem question="Can I cancel anytime?" answer="Absolutely. Cancel from your account dashboard with one click. No questions asked, no fees. Your access continues until the end of your billing period." />
-            <FAQItem question="What private trackers does this work with?" answer="Any tracker supported by Jackett or Prowlarr. This includes all major private trackers for movies, TV, and sports. Your Jackett setup determines what content you can access." />
-            <FAQItem question="Is my seedbox username/password safe?" answer="Yes. Your credentials are encrypted with AES-256-GCM and stored only in your browser's config token. We never store your seedbox credentials on our servers. Every request decrypts your config on-demand." />
+            {[
+              {
+                q: 'Do you transcode my files?',
+                a: 'No. We serve files DIRECTLY from your qBittorrent WebDAV. Stremio plays them as-is.'
+              },
+              {
+                q: 'Where are my credentials stored?',
+                a: 'AES-256-GCM encrypted in your addon config URL. We never see your plaintext passwords.'
+              },
+              {
+                q: 'What seedboxes are supported?',
+                a: 'ANY seedbox with qBittorrent WebUI. Hetzner, Whatbox, Seedhost, your basement — if it has qBit, it works.'
+              },
+              {
+                q: 'Is this legal?',
+                a: 'PVTKRRX is a bridge. What you stream depends on YOUR indexers and YOUR seedbox. We\'re just the pipe.'
+              },
+              {
+                q: 'Can I use multiple Jackett/Prowlarr indexers?',
+                a: 'Yes. Configure up to 5 indexers in your addon settings.'
+              },
+              {
+                q: 'What about sports?',
+                a: 'Sports catalog is #1 priority. Live events, replays, highlights — all searchable by date, league, team.'
+              },
+            ].map((faq, idx) => (
+              <motion.details
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="group bg-dark-secondary/50 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden hover:border-neon-cyan/30 transition-colors duration-300"
+              >
+                <summary className="cursor-pointer px-6 py-4 font-rajdhani font-semibold text-lg flex items-center justify-between hover:text-neon-cyan transition-colors duration-300">
+                  <span>{faq.q}</span>
+                  <span className="text-neon-cyan group-open:rotate-180 transition-transform duration-300">▼</span>
+                </summary>
+                <div className="px-6 pb-4 text-gray text-sm leading-relaxed border-t border-white/5">
+                  {faq.a}
+                </div>
+              </motion.details>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-neon-cyan/20 to-neon-magenta/20 border border-neon-cyan/30 rounded-3xl p-16">
-          <h2 className="text-5xl font-rajdhani font-bold mb-6 text-white">Ready to Stream?</h2>
-          <p className="text-xl mb-10 text-gray">Start your 7-day free trial. No credit card required.</p>
-          <Link href="/signup" className="inline-block px-10 py-5 bg-neon-cyan text-dark font-rajdhani font-bold text-lg rounded-xl
-                                         hover:bg-neon-cyan/90 transition shadow-lg shadow-neon-cyan/30">
-            Get Started Free
-          </Link>
+      {/* Final CTA */}
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-dark" />
+        <div className="absolute inset-0 mesh-bg-layer-1" />
+        <div className="absolute inset-0 mesh-bg-layer-2" />
+        <div className="absolute inset-0 mesh-bg-layer-3" />
+        <div className="absolute inset-0 cyber-grid" />
+        <div className="absolute inset-0 radial-distortion" />
+        <div className="absolute inset-0 digital-noise" />
+        <div className="absolute inset-0 scan-lines-heavy" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="chromatic-aberration mb-8" data-text="READY?">
+              <h2 className="chrome-text-animated text-6xl sm:text-7xl lg:text-8xl font-rajdhani font-black pixel-glitch">
+                READY?
+              </h2>
+            </div>
+
+            <p className="text-xl sm:text-2xl text-gray mb-12 max-w-2xl mx-auto">
+              Your seedbox is waiting. Your private trackers are ready. Let's bridge the gap.
+            </p>
+
+            <Link
+              href="/signup"
+              className="inline-block px-12 py-5 bg-gradient-to-r from-neon-cyan to-neon-magenta text-dark font-rajdhani font-bold text-xl rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-neon-cyan/50"
+            >
+              Start Free Trial →
+            </Link>
+
+            <p className="mt-6 text-gray text-sm">
+              7 days free • No credit card • £1/month after
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-16 px-4 bg-dark-secondary/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-10 mb-12">
+      <footer className="relative border-t border-white/5 py-12 scan-lines-heavy">
+        <div className="absolute inset-0 bg-dark-secondary" />
+        <div className="absolute inset-0 digital-noise opacity-50" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Logo */}
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-neon-cyan to-neon-magenta rounded-lg" />
-                <span className="text-lg font-orbitron font-black chrome-text">PVTKRRX</span>
-              </div>
-              <p className="text-sm text-gray">Stream from your seedbox to Stremio.</p>
+              <div className="chrome-text text-2xl font-rajdhani font-black mb-2">PVTKRRX</div>
+              <p className="text-gray text-sm">Your seedbox → Stremio</p>
             </div>
+
+            {/* Links */}
             <div>
-              <h4 className="font-rajdhani font-semibold mb-4 text-white">Product</h4>
+              <h3 className="font-rajdhani font-semibold mb-3 text-white">Product</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#features" className="text-gray hover:text-neon-cyan transition">Features</a></li>
-                <li><a href="#pricing" className="text-gray hover:text-neon-cyan transition">Pricing</a></li>
-                <li><Link href="/signup" className="text-gray hover:text-neon-cyan transition">Sign Up</Link></li>
+                <li><a href="#features" className="text-gray hover:text-neon-cyan transition-colors">Features</a></li>
+                <li><a href="#pricing" className="text-gray hover:text-neon-cyan transition-colors">Pricing</a></li>
+                <li><Link href="/docs" className="text-gray hover:text-neon-cyan transition-colors">Documentation</Link></li>
+                <li><a href="#faq" className="text-gray hover:text-neon-cyan transition-colors">FAQ</a></li>
               </ul>
             </div>
+
+            {/* Legal */}
             <div>
-              <h4 className="font-rajdhani font-semibold mb-4 text-white">Support</h4>
+              <h3 className="font-rajdhani font-semibold mb-3 text-white">Legal</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#faq" className="text-gray hover:text-neon-cyan transition">FAQ</a></li>
-                <li><Link href="/docs" className="text-gray hover:text-neon-cyan transition">Documentation</Link></li>
-                <li><a href="mailto:support@pvtkrrx.com" className="text-gray hover:text-neon-cyan transition">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-rajdhani font-semibold mb-4 text-white">Legal</h4>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/privacy" className="text-gray hover:text-neon-cyan transition">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="text-gray hover:text-neon-cyan transition">Terms of Service</Link></li>
+                <li><Link href="/privacy" className="text-gray hover:text-neon-cyan transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-gray hover:text-neon-cyan transition-colors">Terms of Service</Link></li>
+                <li><a href="https://github.com/kepner/pvtkrrx" className="text-gray hover:text-neon-cyan transition-colors">Source Code</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-white/5 pt-8 text-center text-sm text-gray">
-            © 2026 PVTKRRX. All rights reserved.
+
+          <div className="mt-8 pt-8 border-t border-white/5 text-center text-gray text-xs">
+            <p>© 2026 PVTKRRX. Source Available License.</p>
+            <p className="mt-2 font-jetbrains">Built with stremio-addon-sdk • Hosted on Vercel</p>
           </div>
         </div>
       </footer>
     </main>
-  )
-}
-
-function FeatureCard({ icon, title, description }: { icon: string; title: string; description: string }) {
-  return (
-    <div className="group relative bg-dark-secondary rounded-2xl p-8 border border-white/5
-                    hover:border-neon-cyan/30 transition-all duration-300
-                    hover:shadow-lg hover:shadow-neon-cyan/10">
-      {/* Glow effect on hover */}
-      <div className="absolute inset-0 bg-gradient-radial from-neon-cyan/5 via-transparent to-transparent
-                      opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
-
-      {/* Icon */}
-      <div className="text-5xl mb-5 group-hover:scale-110 transition-transform relative z-10">
-        {icon}
-      </div>
-
-      {/* Title (angular font) */}
-      <h3 className="text-xl font-rajdhani font-bold mb-3 text-white relative z-10">
-        {title}
-      </h3>
-
-      {/* Description (readable) */}
-      <p className="text-gray leading-relaxed relative z-10">
-        {description}
-      </p>
-    </div>
-  )
-}
-
-function PricingFeature({ text }: { text: string }) {
-  return (
-    <li className="flex items-start gap-3">
-      <svg className="w-5 h-5 text-neon-cyan flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-      </svg>
-      <span className="text-white">{text}</span>
-    </li>
-  )
-}
-
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  return (
-    <div className="bg-dark-secondary rounded-2xl p-6 border border-white/5 hover:border-white/10 transition">
-      <h3 className="text-lg font-rajdhani font-semibold mb-3 text-white">{question}</h3>
-      <p className="text-gray leading-relaxed">{answer}</p>
-    </div>
   )
 }
