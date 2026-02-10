@@ -68,10 +68,37 @@ export default function Home() {
               className="space-y-8"
             >
               {/* Logo - BIG and BOLD */}
-              <div className="chromatic-aberration" data-text="PVTKRRX">
-                <GlitchText className="chrome-text-animated text-7xl sm:text-8xl lg:text-9xl leading-none pixel-glitch">
+              <div className="relative">
+                {/* Layer 1: Far red ghost */}
+                <div
+                  className="absolute inset-0 text-7xl sm:text-8xl lg:text-9xl font-black text-red-500 opacity-40 pointer-events-none select-none"
+                  style={{
+                    fontFamily: 'var(--font-orbitron)',
+                    transform: 'translateX(-20px)',
+                    zIndex: 1
+                  }}
+                >
                   PVTKRRX
-                </GlitchText>
+                </div>
+
+                {/* Layer 2: Far cyan ghost */}
+                <div
+                  className="absolute inset-0 text-7xl sm:text-8xl lg:text-9xl font-black text-cyan-400 opacity-40 pointer-events-none select-none"
+                  style={{
+                    fontFamily: 'var(--font-orbitron)',
+                    transform: 'translateX(20px)',
+                    zIndex: 2
+                  }}
+                >
+                  PVTKRRX
+                </div>
+
+                {/* Layer 3: Original with chromatic aberration */}
+                <div className="relative chromatic-aberration" data-text="PVTKRRX" style={{ zIndex: 3 }}>
+                  <GlitchText className="chrome-text-animated text-7xl sm:text-8xl lg:text-9xl leading-none pixel-glitch">
+                    PVTKRRX
+                  </GlitchText>
+                </div>
               </div>
 
               {/* Tagline with stagger reveal */}
