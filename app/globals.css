@@ -53,12 +53,10 @@ body::before {
 /* Glitch text effect */
 .glitch-text {
   position: relative;
-  color: #E8E8E8;
 }
 
 .glitch-text-animated {
   position: relative;
-  color: #E8E8E8;
   animation: glitch-skew 2s infinite;
 }
 
