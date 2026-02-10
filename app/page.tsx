@@ -39,7 +39,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         {/* Ambient glow background */}
-        <div className="absolute inset-0 bg-gradient-radial from-neon-cyan/10 via-transparent to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-radial from-neon-cyan/20 via-neon-magenta/5 to-transparent blur-3xl" />
 
         {/* VHS scan lines */}
         <div className="hero-scan-lines absolute inset-0" />

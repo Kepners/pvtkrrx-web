@@ -10,8 +10,7 @@ export function GlitchText({ children, className = '' }: { children: string, cla
         position: 'relative',
         fontFamily: 'var(--font-orbitron)',
         fontWeight: 900,
-        color: '#E8E8E8',
-        textShadow: '2px 0 #00FFFF, -2px 0 #FF00FF',
+        textShadow: '4px 0 #00FFFF, -4px 0 #FF00FF, 0 0 20px rgba(0, 255, 255, 0.5)',
       }}
       animate={{
         skewX: [0, -1, 1, 0, 1, 0, -1, 0],
