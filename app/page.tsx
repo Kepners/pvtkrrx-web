@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { GlitchText } from '@/components/GlitchText'
+import { motion } from 'framer-motion'
 
 export default function Home() {
   return (
@@ -37,9 +40,12 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-        {/* Ambient glow background */}
-        <div className="absolute inset-0 bg-gradient-radial from-neon-cyan/20 via-neon-magenta/5 to-transparent blur-3xl" />
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
+        {/* Animated mesh background - 3 layers */}
+        <div className="absolute inset-0 mesh-bg-layer-1" />
+        <div className="absolute inset-0 mesh-bg-layer-2" />
+        <div className="absolute inset-0 mesh-bg-layer-3" />
+        <div className="absolute inset-0 cyber-grid" />
 
         {/* VHS scan lines */}
         <div className="hero-scan-lines absolute inset-0" />
@@ -47,48 +53,165 @@ export default function Home() {
         {/* CRT distortion */}
         <div className="crt-effect absolute inset-0" />
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-5xl">
-          {/* Logo with glitch + chrome */}
-          <GlitchText className="chrome-text-animated text-7xl sm:text-8xl mb-8">
-            PVTKRRX
-          </GlitchText>
+        {/* Asymmetric Grid Layout */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
 
-          {/* Tagline */}
-          <h1 className="text-3xl sm:text-5xl font-rajdhani font-bold mb-6 leading-tight">
-            Stream From Your Seedbox<br />
-            to <span className="text-neon-cyan">Stremio</span>
-          </h1>
-
-          {/* Body text (readable, no effects) */}
-          <p className="text-lg text-gray mb-12 max-w-2xl mx-auto">
-            Turn your private tracker downloads into a personal Stremio catalog.{' '}
-            <span className="text-white font-semibold">£1/month.</span>
-          </p>
-
-          {/* CTAs with neon glow */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/signup"
-              className="px-8 py-4 bg-neon-cyan text-dark font-rajdhani font-bold text-lg rounded-lg
-                         hover:bg-neon-cyan/90 transition shadow-lg shadow-neon-cyan/30
-                         hover:shadow-neon-cyan/50 hover:scale-105 active:scale-100"
+            {/* LEFT: Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="space-y-8"
             >
-              Start Free Trial
-            </Link>
-            <a
-              href="#features"
-              className="px-8 py-4 bg-white/5 text-white font-rajdhani font-semibold text-lg rounded-lg
-                         border border-white/10 hover:border-neon-magenta hover:text-neon-magenta
-                         transition"
+              {/* Logo - BIG and BOLD */}
+              <GlitchText className="chrome-text-animated text-7xl sm:text-8xl lg:text-9xl leading-none">
+                PVTKRRX
+              </GlitchText>
+
+              {/* Tagline with stagger reveal */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="space-y-3"
+              >
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-rajdhani font-bold leading-tight">
+                  Stream From Your <span className="text-neon-cyan">Seedbox</span>
+                  <br />
+                  to <span className="text-neon-magenta">Stremio</span>
+                </h1>
+
+                <p className="text-lg sm:text-xl text-gray max-w-lg">
+                  Turn your private tracker downloads into a personal catalog.{' '}
+                  <span className="text-white font-bold">£1/month.</span>
+                </p>
+              </motion.div>
+
+              {/* CTAs with magnetic hover */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <Link
+                  href="/signup"
+                  className="group relative px-8 py-4 bg-neon-cyan text-dark font-rajdhani font-bold text-lg rounded-lg
+                             overflow-hidden transition-all duration-300
+                             hover:scale-105 hover:shadow-2xl hover:shadow-neon-cyan/50"
+                >
+                  <span className="relative z-10">Start Free Trial</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan to-neon-magenta opacity-0
+                                 group-hover:opacity-100 transition-opacity duration-300" />
+                </Link>
+
+                <a
+                  href="#features"
+                  className="px-8 py-4 bg-white/5 text-white font-rajdhani font-semibold text-lg rounded-lg
+                             border border-white/10 hover:border-neon-cyan hover:bg-white/10
+                             transition-all duration-300"
+                >
+                  See How It Works
+                </a>
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+                className="text-sm text-gray"
+              >
+                No credit card required • 7-day free trial • Cancel anytime
+              </motion.p>
+            </motion.div>
+
+            {/* RIGHT: Glitch Monitor Visual */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative hidden lg:block"
             >
-              See How It Works
-            </a>
+              {/* Glitch frame */}
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-2 border-neon-cyan/30
+                             bg-gradient-to-br from-dark-secondary/50 to-transparent backdrop-blur-sm">
+
+                {/* Inner glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/10 via-transparent to-neon-magenta/10" />
+
+                {/* Terminal lines */}
+                <div className="relative p-8 font-jetbrains text-sm space-y-2">
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1, duration: 0.4 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-neon-cyan">$</span>
+                    <span className="text-gray">jackett search "Formula 1"</span>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.2, duration: 0.4 }}
+                    className="text-neon-magenta pl-4"
+                  >
+                    → Found 47 results
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.4, duration: 0.4 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-neon-cyan">$</span>
+                    <span className="text-gray">qbittorrent download</span>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.6, duration: 0.4 }}
+                    className="text-neon-magenta pl-4"
+                  >
+                    ✓ Added to queue
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.8, duration: 0.4 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-neon-cyan">$</span>
+                    <span className="text-gray">stremio stream</span>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 2, duration: 0.4 }}
+                    className="text-neon-cyan pl-4 font-bold"
+                  >
+                    ▶ PLAYING NOW
+                  </motion.div>
+                </div>
+
+                {/* Glitch effect overlay */}
+                <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-20">
+                  <div className="w-full h-full bg-gradient-to-r from-neon-cyan via-transparent to-neon-magenta animate-pulse" />
+                </div>
+              </div>
+
+              {/* Floating particles */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-neon-cyan/20 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-neon-magenta/20 rounded-full blur-3xl animate-pulse"
+                   style={{ animationDelay: '1s' }} />
+            </motion.div>
           </div>
-
-          <p className="mt-8 text-sm text-gray">
-            No credit card required • 7-day free trial • Cancel anytime
-          </p>
         </div>
       </section>
 

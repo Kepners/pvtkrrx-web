@@ -21,6 +21,79 @@ body::before {
   opacity: 0.8;
 }
 
+/* Animated mesh gradient background */
+@keyframes mesh-drift-1 {
+  0%, 100% {
+    background-position: 0% 0%;
+    opacity: 0.4;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes mesh-drift-2 {
+  0%, 100% {
+    background-position: 100% 0%;
+    opacity: 0.3;
+  }
+  50% {
+    background-position: 0% 100%;
+    opacity: 0.5;
+  }
+}
+
+@keyframes mesh-drift-3 {
+  0%, 100% {
+    background-position: 50% 50%;
+    opacity: 0.2;
+  }
+  50% {
+    background-position: 0% 0%;
+    opacity: 0.4;
+  }
+}
+
+.mesh-bg-layer-1 {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    rgba(0, 255, 255, 0.15),
+    transparent
+  );
+  background-size: 200% 200%;
+  animation: mesh-drift-1 20s ease-in-out infinite;
+}
+
+.mesh-bg-layer-2 {
+  background: radial-gradient(
+    ellipse 70% 60% at 0% 100%,
+    rgba(255, 0, 255, 0.12),
+    transparent
+  );
+  background-size: 200% 200%;
+  animation: mesh-drift-2 25s ease-in-out infinite;
+}
+
+.mesh-bg-layer-3 {
+  background: radial-gradient(
+    ellipse 90% 70% at 100% 50%,
+    rgba(0, 255, 255, 0.08),
+    transparent
+  );
+  background-size: 200% 200%;
+  animation: mesh-drift-3 30s ease-in-out infinite;
+}
+
+/* Grid overlay for cyberpunk depth */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
+}
+
 /* Chrome text effect */
 .chrome-text {
   font-family: var(--font-orbitron);
