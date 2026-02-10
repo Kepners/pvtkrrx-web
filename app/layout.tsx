@@ -10,6 +10,10 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], weight: '500', variable: 
 export const metadata: Metadata = {
   title: 'PVTKRRX — Stream From Your Seedbox to Stremio',
   description: 'Turn your private tracker downloads into a personal Stremio catalog. £1/month.',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.png',
+  },
 }
 
 export default function RootLayout({
